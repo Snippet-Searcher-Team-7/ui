@@ -1,4 +1,4 @@
-import {CreateSnippet, Snippet, SnippetDescriptor} from '@/data/snippet'
+import {CreateSnippet, Snippet, SnippetDescriptor, UpdateSnippet} from '@/data/snippet'
 
 export interface SnippetOperations {
   listSnippetDescriptors(): Promise<SnippetDescriptor[]>
@@ -6,4 +6,6 @@ export interface SnippetOperations {
   createSnippet(createSnippet: CreateSnippet): Promise<SnippetDescriptor>
 
   getSnippetById(id: string): Promise<Snippet | undefined>
+
+  updateSnippetById(id: string, updateSnippet: UpdateSnippet): Promise<SnippetDescriptor>
 }

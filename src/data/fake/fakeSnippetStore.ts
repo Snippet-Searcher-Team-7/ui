@@ -1,6 +1,5 @@
-import {Compliance, CreateSnippet, Snippet, SnippetDescriptor, SnippetType} from '@/data/snippet'
-import { v4 as uuid } from 'uuid'
-
+import {Compliance, CreateSnippet, Snippet, SnippetDescriptor, SnippetType, UpdateSnippet} from '@/data/snippet'
+import {v4 as uuid} from 'uuid'
 
 export type StoredSnippet = {
   id: string
@@ -66,5 +65,20 @@ export class FakeSnippetStore {
 
   getSnippetById(id: string): Snippet | undefined {
     return this.snippetMap.get(id)
+  }
+
+  updateSnippet(id: string, updateSnippet: UpdateSnippet): SnippetDescriptor {
+    const existingSnippet = this.snippetMap.get(id)
+
+    if (existingSnippet === undefined)
+      throw Error(`Snippet with id ${id} does not exist`)
+
+    const newSnippet = {
+      ...existingSnippet,
+      ...updateSnippet
+    }
+    this.snippetMap.set(id, newSnippet)
+
+    return newSnippet
   }
 }

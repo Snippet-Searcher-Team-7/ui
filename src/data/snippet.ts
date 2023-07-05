@@ -26,3 +26,8 @@ export const CreateSnippetSchema = z.object({
   content: z.string()
 })
 export type CreateSnippet = z.infer<typeof CreateSnippetSchema>
+
+export const UpdateSnippetSchema = z.object({
+  content: z.string()
+})
+export type UpdateSnippet = z.infer<typeof UpdateSnippetSchema>

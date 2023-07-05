@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import {CreateSnippet, CreateSnippetSchema, SnippetType} from '@/data/snippet'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {Box, Button, Grid, MenuItem} from '@mui/material'
-import {FormContainer, SelectElement, TextFieldElement, useFormContext} from 'react-hook-form-mui'
+import {FormContainer, SelectElement, TextFieldElement} from 'react-hook-form-mui'
 import {SnippetFileField} from '@/app/snippets/create/snippetFileField'
 
 const TYPE_OPTIONS = [
@@ -14,16 +14,10 @@ const TYPE_OPTIONS = [
 
 export type CreateSnippetFormProps = {
   onCreate: (createSnippet: CreateSnippet) => void
+  onCancel: () => void
 }
 
-function FileField() {
-  return null
-}
-
-export const CreateSnippetForm: FC<CreateSnippetFormProps> = ({onCreate}) => {
-
-  useFormContext<CreateSnippet>()
-
+export const CreateSnippetForm: FC<CreateSnippetFormProps> = ({onCreate, onCancel}) => {
   return (
     <FormContainer
       resolver={zodResolver(CreateSnippetSchema)}
@@ -61,7 +55,7 @@ export const CreateSnippetForm: FC<CreateSnippetFormProps> = ({onCreate}) => {
         </Grid>
       </Grid>
       <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-        <Button sx={{mt: 3, ml: 1}}>
+        <Button sx={{mt: 3, ml: 1}} onClick={onCancel}>
           Cancel
         </Button>
         <Button
