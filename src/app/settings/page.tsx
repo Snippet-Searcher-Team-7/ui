@@ -18,14 +18,17 @@ const SettingsPage: FC = () => {
         "snake case"
     ]
 
-    const handleSubmit =()=> {
-
+    const handleFormatSubmit =()=> {
+        console.log("format")
+    }
+    const handleLinterSubmit =()=> {
+        console.log("lint")
     }
 
   return (
     <>
-        <form onSubmit={handleSubmit}>
-        <h1>FORMAT SETTINGS</h1>
+        <form style={{color:"black"}} onSubmit={handleFormatSubmit}>
+        <h1 style={{color:"black"}}>FORMAT SETTINGS</h1>
 
 
             <input
@@ -73,29 +76,35 @@ const SettingsPage: FC = () => {
             />
             'if' key in same line
 
-        <h1>LINTER SETTINGS</h1>
-        <input
-            type="text"
-            value={caseConvention}
-            onChange={e => setCaseConvention(e.currentTarget.value)}
-        />
-        Case convention
         <br/>
-        <input
-            type="checkbox"
-            checked={printLnCondition}
-            onChange={e => setPrintLnCondition(e.target.checked)}
-        />
-        Print condition
-        <br/>
-        <input
-            type="checkbox"
-            checked={readInputCondition}
-            onChange={e => setReadInputCondition(e.target.checked)}
-        />
-        Read input condition
+            <br/>
+            <br/>
+            <input type="submit" value="Submit"/>
+        </form>
+        <form style={{color:"black"}} onSubmit={handleLinterSubmit}>
+            <h1>LINTER SETTINGS</h1>
+            <input
+                type="text"
+                value={caseConvention}
+                onChange={e => setCaseConvention(e.currentTarget.value)}
+            />
+            Case convention
+            <br/>
+            <input
+                type="checkbox"
+                checked={printLnCondition}
+                onChange={e => setPrintLnCondition(e.target.checked)}
+            />
+            Print condition
+            <br/>
+            <input
+                type="checkbox"
+                checked={readInputCondition}
+                onChange={e => setReadInputCondition(e.target.checked)}
+            />
+            Read input condition
 
-        <br/>
+            <br/>
             <br/>
             <br/>
             <input type="submit" value="Submit"/>
