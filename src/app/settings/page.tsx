@@ -1,5 +1,6 @@
 "use client";
 import {FC, useState} from 'react'
+import {useOperations} from "@/data/operationsContext";
 
 const SettingsPage: FC = () => {
     const [spaceBeforeColonInDeclaration, setSpaceBeforeColonInDeclaration] = useState(false);
@@ -13,6 +14,8 @@ const SettingsPage: FC = () => {
     const [printLnCondition, setPrintLnCondition] = useState(false);
     const [readInputCondition, setReadInputCondition] = useState(false);
 
+    const {snippetOperations} = useOperations()
+
     const caseOptions = [
         "camel case",
         "snake case"
@@ -20,9 +23,22 @@ const SettingsPage: FC = () => {
 
     const handleFormatSubmit =()=> {
         console.log("format")
+        snippetOperations.updateFormattingRules("1", new Map<string, string>([
+            ["spaceBeforeColonInDeclaration", spaceBeforeColonInDeclaration + ""],
+            ["spaceAfterColonInDeclaration", spaceAfterColonInDeclaration + ""],
+            ["spaceBeforeAndAfterEqualSignInAssignment", spaceBeforeAndAfterEqualSignInAssignment + ""],
+            ["amountOfLineBreaksBeforePrintLn", amountOfLineBreaksBeforePrintLn + ""],
+            ["AmountOfIndentedInIfBlock", AmountOfIndentedInIfBlock + ""],
+            ["IfKeyInSameLine", IfKeyInSameLine + ""]
+        ]))
     }
     const handleLinterSubmit =()=> {
         console.log("lint")
+        snippetOperations.updateLinterRules("1", new Map<string, string>([
+            ["caseConvention", caseConvention],
+            ["printLnCondition", printLnCondition + ""],
+            ["readInputCondition", readInputCondition + ""]
+        ]))
     }
 
   return (

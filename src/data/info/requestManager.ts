@@ -1,27 +1,9 @@
 import {Compliance, CreateSnippet, Snippet, SnippetDescriptor, SnippetType, UpdateSnippet} from "@/data/snippet";
-import {v4 as uuid} from "uuid";
 import axios from 'axios';
-import {StoredSnippet} from "@/data/fake/fakeSnippetStore";
-
-// export type StoredSnippet = {
-//     id: string
-//     name: string
-//     type: SnippetType
-//     content: string
-//     compliance: Compliance
-// }
+import {StoredSnippet} from "@/data/info/snippetStore";
 
 
 export class RequestManager {
-    private readonly snippetMap: Map<string, StoredSnippet> = new Map()
-
-    constructor() {
-        this.getSnippetsOfUser("1", (list => {
-            list.forEach(snippet => {
-                this.snippetMap.set(snippet.id, snippet)
-            })
-        }))
-    }
 
     getSnippetsOfUser(id: string, response) {
         this.getRequest('http://localhost:8081/snippet/getAllSnippets/' + id,
@@ -47,10 +29,10 @@ export class RequestManager {
         if (status == "PENDING") {
             return 'pending'
         }
-        else if (status == "INVALID") {
+        else if (status == "FAILED") {
             return 'failed'
         }
-        else if (status == "VALID") {
+        else if (status == "COMPLIANT") {
             return 'compliant'
         }
         else {
@@ -59,48 +41,24 @@ export class RequestManager {
     }
 
 
-    listSnippetDescriptors(): SnippetDescriptor[] {
-        return Array.from(this.snippetMap, ([_, value]) => value)
+
+    updateSnippet(id: string, updateSnippet: UpdateSnippet) {
+
+    }
+    updateFormattingRules(userId: string, rules: Map<string, string>) {
+        this.postRequest('http://localhost:8081/rule/updateFormatterRules/' + userId, rules, () => {
+
+        }, ()=> {
+            console.log("error in /rule/updateFormatterRules")
+        })
     }
 
-    createSnippet(createSnippet: CreateSnippet): SnippetDescriptor {
-        const snippet: StoredSnippet = {
-            id: uuid(),
-            name: createSnippet.name,
-            content: createSnippet.content,
-            type: createSnippet.type,
-            compliance: 'compliant'
-        }
+    updateLinterRules(userId: string, rules: Map<string, string>) {
+        this.postRequest('http://localhost:8081/rule/updateScaRules/' + userId, rules, () => {
 
-        this.snippetMap.set(snippet.id, snippet)
-
-        return snippet
-    }
-
-    getSnippetById(id: string): Snippet | undefined {
-        console.log(id)
-        console.log(this.snippetMap)
-        return this.snippetMap.get(id)
-    }
-
-    updateSnippet(id: string, updateSnippet: UpdateSnippet): SnippetDescriptor {
-        const existingSnippet = this.snippetMap.get(id)
-
-        if (existingSnippet === undefined)
-            throw Error(`Snippet with id ${id} does not exist`)
-
-        const newSnippet = {
-            ...existingSnippet,
-            ...updateSnippet
-        }
-        this.snippetMap.set(id, newSnippet)
-
-        return newSnippet
-    }
-    updateFormattingRules(id: string) {
-    }
-
-    updateLinterRules(id: string) {
+        }, ()=> {
+            console.log("error in /rule/updateScaRules")
+        })
     }
 
     createTestCase(data) {

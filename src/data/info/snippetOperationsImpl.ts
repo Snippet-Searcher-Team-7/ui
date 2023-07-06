@@ -2,12 +2,12 @@ import {SnippetOperations} from '@/data/snippetOperations'
 import {FakeSnippetStore} from '@/data/fake/fakeSnippetStore'
 import {CreateSnippet, Snippet, SnippetDescriptor, UpdateSnippet} from '@/data/snippet'
 import autoBind from 'auto-bind'
-import {RequestManager} from "@/data/info/requestManager";
+import {SnippetStore} from "@/data/info/snippetStore";
 
 const DELAY: number = 1000
 
 export class SnippetOperationsImpl implements SnippetOperations {
-    private requestManager = new RequestManager()
+    private snippetStore = new SnippetStore()
 
     constructor() {
         autoBind(this)
@@ -15,33 +15,35 @@ export class SnippetOperationsImpl implements SnippetOperations {
 
     createSnippet(createSnippet: CreateSnippet): Promise<SnippetDescriptor> {
         return new Promise(resolve => {
-            setTimeout(() => resolve(this.requestManager.createSnippet(createSnippet)), DELAY)
+            setTimeout(() => resolve(this.snippetStore.createSnippet(createSnippet)), DELAY)
         })
     }
 
     getSnippetById(id: string): Promise<Snippet | undefined> {
         return new Promise(resolve => {
-            setTimeout(() => resolve(this.requestManager.getSnippetById(id)), DELAY)
+            setTimeout(() => resolve(this.snippetStore.getSnippetById(id)), DELAY)
         })
 
     }
 
     listSnippetDescriptors(): Promise<SnippetDescriptor[]> {
         return new Promise(resolve => {
-            setTimeout(() => resolve(this.requestManager.listSnippetDescriptors()), DELAY)
+            setTimeout(() => resolve(this.snippetStore.listSnippetDescriptors()), DELAY)
         })
     }
 
     updateSnippetById(id: string, updateSnippet: UpdateSnippet): Promise<SnippetDescriptor> {
         return new Promise(resolve => {
-            setTimeout(() => resolve(this.requestManager.updateSnippet(id, updateSnippet)), DELAY)
+            setTimeout(() => resolve(this.snippetStore.updateSnippet(id, updateSnippet)), DELAY)
         })
     }
 
-    updateFormattingRules(id: string) {
+    updateFormattingRules(userId: string, rules: Map<string, string>) {
+        this.snippetStore.updateFormattingRules(userId, rules)
     }
 
-    updateLinterRules(id: string) {
+    updateLinterRules(userId: string, rules: Map<string, string>) {
+        this.snippetStore.updateLinterRules(userId, rules)
     }
 
     createTestCase(data) {

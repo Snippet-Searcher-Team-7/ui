@@ -9,9 +9,9 @@ export interface SnippetOperations {
 
   updateSnippetById(id: string, updateSnippet: UpdateSnippet): Promise<SnippetDescriptor>
 
-  updateFormattingRules(userId: string)
+  updateFormattingRules(userId: string, rules: Map<string, string>)
 
-  updateLinterRules(userId: string)
+  updateLinterRules(userId: string, rules: Map<string, string>)
 
   executeSnippet(id: String) : Promise<String>
 
