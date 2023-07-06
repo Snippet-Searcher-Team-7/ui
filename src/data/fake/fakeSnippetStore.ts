@@ -64,6 +64,7 @@ export class FakeSnippetStore {
   }
 
   getSnippetById(id: string): Snippet | undefined {
+    console.log(this.snippetMap)
     return this.snippetMap.get(id)
   }
 
