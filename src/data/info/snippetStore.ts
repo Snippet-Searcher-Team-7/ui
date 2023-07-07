@@ -40,6 +40,8 @@ export class SnippetStore {
 
         this.snippetMap.set(snippet.id, snippet)
 
+        this.requestManager.createSnippet("1", snippet);
+
         return snippet
     }
 
@@ -59,15 +61,22 @@ export class SnippetStore {
         }
         this.snippetMap.set(id, newSnippet)
 
-
+        this.requestManager.updateSnippet("1", updateSnippet, id);
 
         return newSnippet
     }
-    updateFormattingRules(userId: string, rules: Map<string, string>) {
+    getFormattingRules(userId: string, okCallback, errorCallback) {
+        this.requestManager.getFormattingRules(userId, okCallback, errorCallback);
+    }
+
+    getLinterRules(userId: string, okCallback, errorCallback) {
+        this.requestManager.getLinterRules(userId, okCallback, errorCallback);
+    }
+    updateFormattingRules(userId: string, rules) {
         this.requestManager.updateFormattingRules(userId, rules)
     }
 
-    updateLinterRules(userId: string, rules: Map<string, string>) {
+    updateLinterRules(userId: string, rules) {
         this.requestManager.updateLinterRules(userId, rules)
     }
 

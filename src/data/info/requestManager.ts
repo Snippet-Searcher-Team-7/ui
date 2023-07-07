@@ -18,6 +18,7 @@ export class RequestManager {
                             compliance: this.adaptStatus(snippet.status)}
                     )
                 })
+                console.log("getSnippets sucessful")
                 response(list)
             },
             (error) => {
@@ -40,24 +41,69 @@ export class RequestManager {
         }
     }
 
-
-
-    updateSnippet(id: string, updateSnippet: UpdateSnippet) {
+    createSnippet(userId: string, snippet: StoredSnippet) {
+        this.postRequest('http://localhost:8081/snippet/save/base64encoded/' + userId, {
+                content:btoa(snippet.content),
+                snippetName:snippet.name,
+                type:snippet.type.toUpperCase(),
+                version:1.0
+            },
+            () => {
+                console.log("snippet created")
+            },
+            (error)=> {
+                console.log(error)
+            })
 
     }
-    updateFormattingRules(userId: string, rules: Map<string, string>) {
-        this.postRequest('http://localhost:8081/rule/updateFormatterRules/' + userId, rules, () => {
 
-        }, ()=> {
-            console.log("error in /rule/updateFormatterRules")
+
+
+    updateSnippet(userId: string, updateSnippet: UpdateSnippet, snippetId: string) {
+        this.postRequest('http://localhost:8081/snippet/save/update/base64encoded/' + userId, {
+                content:btoa(updateSnippet.content),
+                id: snippetId
+        },
+            () => {
+                console.log("snippet updated")
+            },
+            (error)=> {
+                console.log(error)
+            })
+
+    }
+    getFormattingRules(userId: string, okCallback, errorCallback) {
+        this.getRequest('http://localhost:8080/rules/get/formatter/' + userId,
+            (data) => {
+                okCallback(data)
+            },
+            (error) => {
+                errorCallback(error)
+            })
+    }
+
+    getLinterRules(userId: string, okCallback, errorCallback) {
+        this.getRequest('http://localhost:8080/rules/get/sca/' + userId,
+            (data) => {
+                okCallback(data)
+            },
+            (error) => {
+                errorCallback(error)
+            })
+    }
+    updateFormattingRules(userId: string, rules) {
+        this.postRequest('http://localhost:8080/rules/update/formatter/' + userId, rules, () => {
+            console.log("updated formatting rules")
+        }, (error)=> {
+            console.log(error)
         })
     }
 
-    updateLinterRules(userId: string, rules: Map<string, string>) {
-        this.postRequest('http://localhost:8081/rule/updateScaRules/' + userId, rules, () => {
-
-        }, ()=> {
-            console.log("error in /rule/updateScaRules")
+    updateLinterRules(userId: string, rules) {
+        this.postRequest('http://localhost:8080/rules/update/sca/' + userId, rules, () => {
+            console.log("updated linter rules")
+        }, (error)=> {
+            console.log(error)
         })
     }
 

@@ -32,17 +32,25 @@ export class SnippetOperationsImpl implements SnippetOperations {
         })
     }
 
+    getFormattingRules(userId: string, okCallback, errorCallback) {
+        this.snippetStore.getFormattingRules(userId, okCallback, errorCallback);
+    }
+
+    getLinterRules(userId: string, okCallback, errorCallback) {
+        this.snippetStore.getLinterRules(userId, okCallback, errorCallback);
+    }
+
     updateSnippetById(id: string, updateSnippet: UpdateSnippet): Promise<SnippetDescriptor> {
         return new Promise(resolve => {
             setTimeout(() => resolve(this.snippetStore.updateSnippet(id, updateSnippet)), DELAY)
         })
     }
 
-    updateFormattingRules(userId: string, rules: Map<string, string>) {
+    updateFormattingRules(userId: string, rules) {
         this.snippetStore.updateFormattingRules(userId, rules)
     }
 
-    updateLinterRules(userId: string, rules: Map<string, string>) {
+    updateLinterRules(userId: string, rules) {
         this.snippetStore.updateLinterRules(userId, rules)
     }
 
@@ -59,4 +67,5 @@ export class SnippetOperationsImpl implements SnippetOperations {
 
     shareSnippet(snippetId: String, sharedUserId: String) {
     }
+
 }
