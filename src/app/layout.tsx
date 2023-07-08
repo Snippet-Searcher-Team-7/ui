@@ -1,7 +1,8 @@
 import './globals.css'
 import {Inter} from 'next/font/google'
-import {ReactNode} from 'react'
+import React, {ReactNode} from 'react'
 import {GlobalContext} from './globalContext'
+import {UserProvider} from "@auth0/nextjs-auth0/client";
 
 const inter = Inter({subsets: ['latin']})
 

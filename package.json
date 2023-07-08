@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^2.6.3",
     "@codemirror/lang-javascript": "^6.1.9",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
