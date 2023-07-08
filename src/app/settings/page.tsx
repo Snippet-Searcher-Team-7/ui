@@ -1,7 +1,12 @@
 "use client";
-import {FC, useState, useEffect, useCallback} from 'react'
+import * as React from 'react';
+import {FC, useState, useEffect} from 'react'
 import {useOperations} from "@/data/operationsContext";
-import {CreateSnippet} from "@/data/snippet";
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
 
 const SettingsPage: FC = () => {
     const [spaceBeforeColonInDeclaration, setSpaceBeforeColonInDeclaration] = useState(false);
@@ -11,16 +16,12 @@ const SettingsPage: FC = () => {
     const [amountOfIndentedInIfBlock, setAmountOfIndentedInIfBlock] = useState(0);
     const [IfKeyInSameLine, setIfKeyInSameLine] = useState(false);
 
-    const [caseConvention, setCaseConvention] = useState("camel case");
+    const [caseConvention, setCaseConvention] = useState("");
     const [printLnCondition, setPrintLnCondition] = useState(false);
     const [readInputCondition, setReadInputCondition] = useState(false);
 
     const {snippetOperations} = useOperations()
 
-    const caseOptions = [
-        "camel case",
-        "snake case"
-    ]
 
     useEffect(() => {
         snippetOperations.getFormattingRules("1",
@@ -72,9 +73,7 @@ const SettingsPage: FC = () => {
   return (
     <>
         <form style={{color:"black"}} onSubmit={handleFormatSubmit}>
-        <h1 style={{color:"black"}}>FORMAT SETTINGS</h1>
-
-
+        <h1>FORMAT SETTINGS</h1>
             <input
                 type="checkbox"
                 checked={spaceBeforeColonInDeclaration}
@@ -120,19 +119,27 @@ const SettingsPage: FC = () => {
             />
             'if' key in same line
 
-        <br/>
             <br/>
             <br/>
             <input type="submit"/>
         </form>
+        <br/>
+        <br/>
         <form style={{color:"black"}} onSubmit={handleLinterSubmit}>
             <h1>LINTER SETTINGS</h1>
-            <input
-                type="text"
-                value={caseConvention}
-                onChange={e => setCaseConvention(e.currentTarget.value)}
-            />
-            Case convention
+            <div>
+                <InputLabel id="demo-simple-select-label">Case convention</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={caseConvention}
+                    label="Age"
+                    onChange={e => setCaseConvention(e.target.value)}
+                >
+                    <MenuItem value={"snake case"}>Snake case</MenuItem>
+                    <MenuItem value={"camel case"}>Camel case</MenuItem>
+                </Select>
+            </div>
             <br/>
             <input
                 type="checkbox"
@@ -148,7 +155,6 @@ const SettingsPage: FC = () => {
             />
             Read input condition
 
-            <br/>
             <br/>
             <br/>
             <input type="submit" value="Submit"/>

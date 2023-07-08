@@ -42,6 +42,10 @@ export class SnippetStore {
 
         this.requestManager.createSnippet("1", snippet);
 
+        // this.requestManager.formatSnippet(snippet.id);
+        //
+        // this.requestManager.validateSnippet(snippet.id);
+
         return snippet
     }
 

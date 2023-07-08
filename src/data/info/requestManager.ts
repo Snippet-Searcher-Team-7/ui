@@ -92,7 +92,7 @@ export class RequestManager {
             })
     }
     updateFormattingRules(userId: string, rules) {
-        this.postRequest('http://localhost:8080/rules/update/formatter/' + userId, rules, () => {
+        this.postRequest('http://localhost:8081/rule/updateFormattingRules/' + userId, rules, () => {
             console.log("updated formatting rules")
         }, (error)=> {
             console.log(error)
@@ -100,8 +100,23 @@ export class RequestManager {
     }
 
     updateLinterRules(userId: string, rules) {
-        this.postRequest('http://localhost:8080/rules/update/sca/' + userId, rules, () => {
+        this.postRequest('http://localhost:8081/rule/updateScaRules/' + userId, rules, () => {
             console.log("updated linter rules")
+        }, (error)=> {
+            console.log(error)
+        })
+    }
+
+    formatSnippet(id: string) {
+        this.postRequest('http://localhost:8082/format/snippet/' + id, "", () => {
+            console.log("formatted a snippet")
+        }, (error)=> {
+            console.log(error)
+        })
+    }
+    validateSnippet(id: string) {
+        this.postRequest('http://localhost:8082/validate/snippet/' + id, "", () => {
+            console.log("validated a snippet")
         }, (error)=> {
             console.log(error)
         })
