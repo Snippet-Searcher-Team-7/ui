@@ -73,7 +73,7 @@ export class RequestManager {
 
     }
     getFormattingRules(userId: string, okCallback, errorCallback) {
-        this.getRequest('http://localhost:8080/rules/get/formatter/' + userId,
+        this.getRequest('http://localhost:8081/rule/get/formatter/' + userId,
             (data) => {
                 okCallback(data)
             },
@@ -83,7 +83,7 @@ export class RequestManager {
     }
 
     getLinterRules(userId: string, okCallback, errorCallback) {
-        this.getRequest('http://localhost:8080/rules/get/sca/' + userId,
+        this.getRequest('http://localhost:8081/rule/get/sca/' + userId,
             (data) => {
                 okCallback(data)
             },
