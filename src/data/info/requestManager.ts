@@ -107,21 +107,6 @@ export class RequestManager {
         })
     }
 
-    formatSnippet(id: string) {
-        this.postRequest('http://localhost:8082/format/snippet/' + id, "", () => {
-            console.log("formatted a snippet")
-        }, (error)=> {
-            console.log(error)
-        })
-    }
-    validateSnippet(id: string) {
-        this.postRequest('http://localhost:8082/validate/snippet/' + id, "", () => {
-            console.log("validated a snippet")
-        }, (error)=> {
-            console.log(error)
-        })
-    }
-
     createTestCase(data) {
     }
 
