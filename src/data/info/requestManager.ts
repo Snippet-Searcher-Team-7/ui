@@ -46,7 +46,7 @@ export class RequestManager {
                 content:btoa(snippet.content),
                 snippetName:snippet.name,
                 type:snippet.type.toUpperCase(),
-                version:1.0
+                version:1.1
             },
             () => {
                 console.log("snippet created")
