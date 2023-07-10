@@ -6,10 +6,14 @@ import {CircularProgress, Grid, Table, TableBody, TableCell, TableHead, TableRow
 import {useQuery} from '@tanstack/react-query'
 import {useOperations} from '@/data/operationsContext'
 import {SnippetRow} from '@/app/snippets/snippetRow'
+import {useUser} from "@auth0/nextjs-auth0/client";
 
 export const SnippetTable: FC = () => {
 
+    const {user} = useUser();
+
   const {snippetOperations} = useOperations()
+
   const {data: snippets, isFetching} = useQuery(['snippets', 'descriptors'], snippetOperations.listSnippetDescriptors)
 
   return (

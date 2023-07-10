@@ -1,6 +1,7 @@
 import {Compliance, CreateSnippet, Snippet, SnippetDescriptor, SnippetType, UpdateSnippet} from "@/data/snippet";
 import {v4 as uuid} from "uuid";
-import {RequestManager} from "@/data/info/requestManager";
+import {RequestManager} from "@/data/real/requestManager";
+
 
 
 export type StoredSnippet = {
@@ -15,9 +16,11 @@ export type StoredSnippet = {
 export class SnippetStore {
     private readonly snippetMap: Map<string, StoredSnippet> = new Map()
     private requestManager: RequestManager = new RequestManager()
+    private readonly userId:string | null | undefined;
 
-    constructor() {
-        this.requestManager.getSnippetsOfUser("1", (list => {
+    constructor(userId: string | null | undefined) {
+        this.userId = userId;
+        this.requestManager.getSnippetsOfUser(userId, (list => {
             list.forEach(snippet => {
                 this.snippetMap.set(snippet.id, snippet)
             })
@@ -40,7 +43,7 @@ export class SnippetStore {
 
         this.snippetMap.set(snippet.id, snippet)
 
-        this.requestManager.createSnippet("1", snippet);
+        this.requestManager.createSnippet(this.userId, snippet);
 
         return snippet
     }
@@ -61,23 +64,23 @@ export class SnippetStore {
         }
         this.snippetMap.set(id, newSnippet)
 
-        this.requestManager.updateSnippet("1", updateSnippet, id);
+        this.requestManager.updateSnippet(this.userId, updateSnippet, id);
 
         return newSnippet
     }
-    getFormattingRules(userId: string, okCallback, errorCallback) {
-        this.requestManager.getFormattingRules(userId, okCallback, errorCallback);
+    getFormattingRules(okCallback, errorCallback) {
+        this.requestManager.getFormattingRules(this.userId, okCallback, errorCallback);
     }
 
-    getLinterRules(userId: string, okCallback, errorCallback) {
-        this.requestManager.getLinterRules(userId, okCallback, errorCallback);
+    getLinterRules(okCallback, errorCallback) {
+        this.requestManager.getLinterRules(this.userId, okCallback, errorCallback);
     }
-    updateFormattingRules(userId: string, rules) {
-        this.requestManager.updateFormattingRules(userId, rules)
+    updateFormattingRules(rules) {
+        this.requestManager.updateFormattingRules(this.userId, rules)
     }
 
-    updateLinterRules(userId: string, rules) {
-        this.requestManager.updateLinterRules(userId, rules)
+    updateLinterRules(rules) {
+        this.requestManager.updateLinterRules(this.userId, rules)
     }
 
     createTestCase(data) {

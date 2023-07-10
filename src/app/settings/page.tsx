@@ -24,7 +24,7 @@ const SettingsPage: FC = () => {
 
 
     useEffect(() => {
-        snippetOperations.getFormattingRules("1",
+        snippetOperations.getFormattingRules(
             (data) => {
             console.log(data)
             setSpaceBeforeColonInDeclaration(data.spaceBeforeColonInDeclaration === "true");
@@ -38,7 +38,7 @@ const SettingsPage: FC = () => {
             console.log(error)
             })
 
-        snippetOperations.getLinterRules("1",
+        snippetOperations.getLinterRules(
             (data) => {
                 console.log(data)
                 setCaseConvention(data.caseConvention);
@@ -52,7 +52,7 @@ const SettingsPage: FC = () => {
     }, [])
     const handleFormatSubmit = async e => {
         e.preventDefault();
-        snippetOperations.updateFormattingRules("1", {
+        snippetOperations.updateFormattingRules({
             spaceBeforeColonInDeclaration:spaceBeforeColonInDeclaration,
             spaceAfterColonInDeclaration:spaceAfterColonInDeclaration,
             spaceBeforeAndAfterEqualSignInAssignment:spaceBeforeAndAfterEqualSignInAssignment,
@@ -63,7 +63,7 @@ const SettingsPage: FC = () => {
     }
     const handleLinterSubmit = async e => {
         e.preventDefault();
-        snippetOperations.updateLinterRules("1", {
+        snippetOperations.updateLinterRules({
             caseConvention:caseConvention,
             printLnCondition:printLnCondition,
             readInputCondition:readInputCondition

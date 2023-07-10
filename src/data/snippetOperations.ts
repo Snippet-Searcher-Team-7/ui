@@ -9,13 +9,13 @@ export interface SnippetOperations {
 
   updateSnippetById(id: string, updateSnippet: UpdateSnippet): Promise<SnippetDescriptor>
 
-  getFormattingRules(userId: string, okCallback, errorCallback)
+  getFormattingRules(okCallback, errorCallback)
 
-  getLinterRules(userId: string, okCallback, errorCallback)
+  getLinterRules(okCallback, errorCallback)
 
-  updateFormattingRules(userId: string, rules)
+  updateFormattingRules(rules)
 
-  updateLinterRules(userId: string, rules)
+  updateLinterRules(rules)
 
   executeSnippet(id: String) : Promise<String>
 
