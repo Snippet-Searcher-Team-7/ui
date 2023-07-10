@@ -1,10 +1,12 @@
+"use client"
+import React from "react";
+import HomePage from "@/util/homePage";
+
 const Home = () => {
   return (
     <>
-        <a href="/api/auth/login">Login</a>
-        <a href="/api/auth/logout">Logout</a>
+        <HomePage/>
     </>
   )
 }
-
 export default Home

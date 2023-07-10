@@ -1,15 +1,17 @@
 import {SnippetOperations} from '@/data/snippetOperations'
-import {FakeSnippetStore} from '@/data/fake/fakeSnippetStore'
 import {CreateSnippet, Snippet, SnippetDescriptor, UpdateSnippet} from '@/data/snippet'
 import autoBind from 'auto-bind'
-import {SnippetStore} from "@/data/info/snippetStore";
+import {SnippetStore} from "@/data/real/snippetStore";
 
 const DELAY: number = 1000
 
-export class SnippetOperationsImpl implements SnippetOperations {
-    private snippetStore = new SnippetStore()
 
-    constructor() {
+
+export class SnippetOperationsImpl implements SnippetOperations {
+    private snippetStore:SnippetStore;
+
+    constructor(userId: string | null | undefined) {
+        this.snippetStore = new SnippetStore(userId?.substring(6))
         autoBind(this)
     }
 
@@ -32,12 +34,12 @@ export class SnippetOperationsImpl implements SnippetOperations {
         })
     }
 
-    getFormattingRules(userId: string, okCallback, errorCallback) {
-        this.snippetStore.getFormattingRules(userId, okCallback, errorCallback);
+    getFormattingRules(okCallback, errorCallback) {
+        this.snippetStore.getFormattingRules(okCallback, errorCallback);
     }
 
-    getLinterRules(userId: string, okCallback, errorCallback) {
-        this.snippetStore.getLinterRules(userId, okCallback, errorCallback);
+    getLinterRules(okCallback, errorCallback) {
+        this.snippetStore.getLinterRules(okCallback, errorCallback);
     }
 
     updateSnippetById(id: string, updateSnippet: UpdateSnippet): Promise<SnippetDescriptor> {
@@ -46,12 +48,12 @@ export class SnippetOperationsImpl implements SnippetOperations {
         })
     }
 
-    updateFormattingRules(userId: string, rules) {
-        this.snippetStore.updateFormattingRules(userId, rules)
+    updateFormattingRules(rules) {
+        this.snippetStore.updateFormattingRules(rules)
     }
 
-    updateLinterRules(userId: string, rules) {
-        this.snippetStore.updateLinterRules(userId, rules)
+    updateLinterRules(rules) {
+        this.snippetStore.updateLinterRules(rules)
     }
 
     createTestCase(data) {

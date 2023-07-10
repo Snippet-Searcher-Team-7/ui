@@ -6,7 +6,8 @@ import {QueryClient} from '@tanstack/query-core'
 import {QueryClientProvider} from '@tanstack/react-query'
 import {OperationsContextType, OperationsProvider} from '@/data/operationsContext'
 import {FakeSnippetOperations} from '@/data/fake/fakeSnippetOperations'
-import {SnippetOperationsImpl} from "@/data/info/snippetOperationsImpl";
+import {SnippetOperationsImpl} from "@/data/real/snippetOperationsImpl";
+import {useUser} from "@auth0/nextjs-auth0/client";
 
 type GlobalContextType = {
   children: ReactNode
@@ -14,12 +15,14 @@ type GlobalContextType = {
 
 const defaultTheme = createTheme()
 const queryClient = new QueryClient()
-const operations: OperationsContextType = {
-  // snippetOperations: new FakeSnippetOperations()
-    snippetOperations: new SnippetOperationsImpl()
-}
+
 
 export const GlobalContext: FC<GlobalContextType> = ({children}) => {
+    const {user} = useUser();
+    const operations: OperationsContextType = {
+        snippetOperations: new SnippetOperationsImpl(user?.sub)
+    }
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <QueryClientProvider client={queryClient}>

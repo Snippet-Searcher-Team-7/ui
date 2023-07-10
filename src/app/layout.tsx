@@ -19,9 +19,11 @@ export default function RootLayout({children}: RootLayoutProps) {
   return (
     <html lang="en">
     <body className={inter.className}>
+    <UserProvider>
     <GlobalContext>
-      {children}
+        {children}
     </GlobalContext>
+    </UserProvider>
     </body>
     </html>
   )
