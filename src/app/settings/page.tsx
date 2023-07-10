@@ -26,7 +26,6 @@ const SettingsPage: FC = () => {
     useEffect(() => {
         snippetOperations.getFormattingRules(
             (data) => {
-            console.log(data)
             setSpaceBeforeColonInDeclaration(data.spaceBeforeColonInDeclaration === "true");
                 setSpaceAfterColonInDeclaration(data.spaceAfterColonInDeclaration === "true");
                 setSpaceBeforeAndAfterEqualSignInAssignment(data.spaceBeforeAndAfterEqualSignInAssignment === "true");
@@ -40,7 +39,6 @@ const SettingsPage: FC = () => {
 
         snippetOperations.getLinterRules(
             (data) => {
-                console.log(data)
                 setCaseConvention(data.caseConvention);
                 setPrintLnCondition(data.printLnCondition === "true");
                 setReadInputCondition(data.readInputCondition === "true");

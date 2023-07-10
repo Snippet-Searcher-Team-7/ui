@@ -9,7 +9,7 @@ import {useUser} from "@auth0/nextjs-auth0/client";
 export class RequestManager {
 
     getSnippetsOfUser(id: string | null | undefined, response) {
-        if (id != null && id != undefined){
+        if (id != null){
             this.getRequest('http://localhost:8081/snippet/getAllSnippets/' + id,
                 (data) => {
                     let list: StoredSnippet[] = []
@@ -26,8 +26,7 @@ export class RequestManager {
                     response(list)
                 },
                 (error) => {
-                    console.log("ERROR")
-                    response(null)
+                    console.log(error)
                 })
         }
         else{
@@ -84,7 +83,7 @@ export class RequestManager {
     }
 
     getFormattingRules(userId: string | null | undefined, okCallback, errorCallback) {
-        this.getRequest('http://localhost:8080/rules/get/formatter/' + userId,
+        this.getRequest('http://localhost:8081/rule/get/formatter/' + userId,
             (data) => {
                 okCallback(data)
             },
@@ -94,7 +93,7 @@ export class RequestManager {
     }
 
     getLinterRules(userId: string | null | undefined, okCallback, errorCallback) {
-        this.getRequest('http://localhost:8080/rules/get/sca/' + userId,
+        this.getRequest('http://localhost:8081/rule/get/sca/' + userId,
             (data) => {
                 okCallback(data)
             },
