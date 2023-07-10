@@ -9,25 +9,32 @@ import {useUser} from "@auth0/nextjs-auth0/client";
 export class RequestManager {
 
     getSnippetsOfUser(id: string | null | undefined, response) {
-        this.getRequest('http://localhost:8081/snippet/getAllSnippets/' + id,
-            (data) => {
-                let list: StoredSnippet[] = []
-                data.forEach(snippet => {
-                    list.push(
-                        {id: snippet.id + "",
-                            name: snippet.snippetName,
-                            type: snippet.type.toLowerCase(),
-                            content: snippet.snippetText,
-                            compliance: this.adaptStatus(snippet.status)}
-                    )
+        if (id != null && id != undefined){
+            this.getRequest('http://localhost:8081/snippet/getAllSnippets/' + id,
+                (data) => {
+                    let list: StoredSnippet[] = []
+                    data.forEach(snippet => {
+                        list.push(
+                            {id: snippet.id + "",
+                                name: snippet.snippetName,
+                                type: snippet.type.toLowerCase(),
+                                content: snippet.snippetText,
+                                compliance: this.adaptStatus(snippet.status)}
+                        )
+                    })
+                    console.log("getSnippets sucessful")
+                    response(list)
+                },
+                (error) => {
+                    console.log("ERROR")
+                    response(null)
                 })
-                console.log("getSnippets sucessful")
-                response(list)
-            },
-            (error) => {
-                console.log("ERROR")
-                response(null)
-            })
+        }
+        else{
+            let list: StoredSnippet[] = []
+            response(list)
+        }
+
     }
     private adaptStatus(status: String):Compliance {
         if (status == "PENDING") {
