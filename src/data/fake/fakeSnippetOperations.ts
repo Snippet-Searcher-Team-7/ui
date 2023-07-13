@@ -56,4 +56,10 @@ export class FakeSnippetOperations implements SnippetOperations {
 
   updateLinterRules(userId: string) {
   }
+
+  getFormattingRules(okCallback, errorCallback) {
+  }
+
+  getLinterRules(okCallback, errorCallback) {
+  }
 }
