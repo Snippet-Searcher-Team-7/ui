@@ -7,10 +7,11 @@ import {useUser} from "@auth0/nextjs-auth0/client";
 
 
 export class RequestManager {
+    private snippet_service_url:string = "https://snippetteam7dev.ddns.net/snippet-api";
 
     getSnippetsOfUser(id: string | null | undefined, response) {
         if (id != null){
-            this.getRequest('http://localhost:8081/snippet/getAllSnippets/' + id,
+            this.getRequest(this.snippet_service_url + '/snippet/getAllSnippets/' + id,
                 (data) => {
                     let list: StoredSnippet[] = []
                     data.forEach(snippet => {
@@ -51,7 +52,7 @@ export class RequestManager {
     }
 
     createSnippet(userId: string | null | undefined, snippet: StoredSnippet) {
-        this.postRequest('http://localhost:8081/snippet/save/base64encoded/' + userId, {
+        this.postRequest(this.snippet_service_url + '/snippet/save/base64encoded/' + userId, {
                 content:btoa(snippet.content),
                 snippetName:snippet.name,
                 type:snippet.type.toUpperCase(),
@@ -69,7 +70,7 @@ export class RequestManager {
 
 
     updateSnippet(userId: string | null | undefined, updateSnippet: UpdateSnippet, snippetId: string) {
-        this.postRequest('http://localhost:8081/snippet/save/update/base64encoded/' + userId, {
+        this.postRequest(this.snippet_service_url + '/snippet/save/update/base64encoded/' + userId, {
                 content:btoa(updateSnippet.content),
                 id: snippetId
         },
@@ -83,7 +84,7 @@ export class RequestManager {
     }
 
     getFormattingRules(userId: string | null | undefined, okCallback, errorCallback) {
-        this.getRequest('http://localhost:8081/rule/get/formatter/' + userId,
+        this.getRequest(this.snippet_service_url + '/rule/get/formatter/' + userId,
             (data) => {
                 okCallback(data)
             },
@@ -93,7 +94,7 @@ export class RequestManager {
     }
 
     getLinterRules(userId: string | null | undefined, okCallback, errorCallback) {
-        this.getRequest('http://localhost:8081/rule/get/sca/' + userId,
+        this.getRequest(this.snippet_service_url + '/rule/get/sca/' + userId,
             (data) => {
                 okCallback(data)
             },
@@ -102,7 +103,7 @@ export class RequestManager {
             })
     }
     updateFormattingRules(userId: string | null | undefined, rules) {
-        this.postRequest('http://localhost:8081/rule/updateFormattingRules/' + userId, rules, () => {
+        this.postRequest(this.snippet_service_url + '/rule/updateFormattingRules/' + userId, rules, () => {
             console.log("updated formatting rules")
         }, (error)=> {
             console.log(error)
@@ -110,23 +111,8 @@ export class RequestManager {
     }
 
     updateLinterRules(userId: string | null | undefined, rules) {
-        this.postRequest('http://localhost:8081/rule/updateScaRules/' + userId, rules, () => {
+        this.postRequest(this.snippet_service_url + '/rule/updateScaRules/' + userId, rules, () => {
             console.log("updated linter rules")
-        }, (error)=> {
-            console.log(error)
-        })
-    }
-
-    formatSnippet(id: string) {
-        this.postRequest('http://localhost:8082/format/snippet/' + id, "", () => {
-            console.log("formatted a snippet")
-        }, (error)=> {
-            console.log(error)
-        })
-    }
-    validateSnippet(id: string) {
-        this.postRequest('http://localhost:8082/validate/snippet/' + id, "", () => {
-            console.log("validated a snippet")
         }, (error)=> {
             console.log(error)
         })
