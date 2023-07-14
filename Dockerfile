@@ -7,17 +7,9 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json* ./
-RUN npm ci;
+RUN npm ci --only=production
 
-# Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
-RUN npm run build
-
-# Production image, copy all the files and run next
+# Production image, copy all the files
 FROM base AS runner
 WORKDIR /app
 
@@ -32,5 +24,5 @@ USER nextjs
 
 EXPOSE 3000
 
-# Run the Next.js application in development mode
-CMD ["npm", "run", "dev"]
+# Run the Next.js application
+CMD ["npm", "run", "start"]
