@@ -1,9 +1,6 @@
-import {Compliance, CreateSnippet, Snippet, SnippetDescriptor, SnippetType, UpdateSnippet} from "@/data/snippet";
+import {Compliance, UpdateSnippet} from "@/data/snippet";
 import axios from 'axios';
 import {StoredSnippet} from "@/data/real/snippetStore";
-import {useUser} from "@auth0/nextjs-auth0/client";
-
-
 
 
 export class RequestManager {
