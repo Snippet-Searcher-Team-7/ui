@@ -36,4 +36,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/your-organization/your-nextjs-app:${{ github.sha }}
+          tags: ghcr.io/snippet-searcher-team-7/snippet-service-dev:latest
