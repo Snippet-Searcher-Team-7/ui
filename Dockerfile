@@ -1,35 +1,18 @@
-FROM node:18-alpine AS base
+# Base Image
+FROM node:14-alpine AS base
 
-# Install dependencies only when needed
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
+# Set the working directory
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
+# Install dependencies
 COPY package.json package-lock.json* ./
-RUN npm ci;
+RUN npm ci --production
 
-# Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+# Copy the application code
 COPY . .
 
-RUN npm run build
-
-# Production image, copy all the files and run next
-FROM base AS runner
-WORKDIR /app
-
-COPY --from=builder /app/public ./public
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
+# Expose port
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+# Command to start the Next.js application
+CMD ["npm", "run", "start"]
