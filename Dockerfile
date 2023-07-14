@@ -25,7 +25,7 @@ USER nextjs
 EXPOSE 3000
 
 # Run the Next.js application
-CMD ["npm", "dev", "run"]
+CMD ["npm", "run", "dev"]
 #FROM node:18-alpine AS base
 #
 ## Install dependencies only when needed
