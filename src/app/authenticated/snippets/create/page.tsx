@@ -3,7 +3,7 @@
 import React, {FC, useCallback} from 'react'
 import {CircularProgress, Grid, Paper, Typography} from '@mui/material'
 import {CreateSnippet} from '@/data/snippet'
-import {CreateSnippetForm} from '@/app/snippets/create/createSnippetForm'
+import {CreateSnippetForm} from '@/app/authenticated/snippets/create/createSnippetForm'
 import {useMutation} from '@tanstack/react-query'
 import {useRouter} from 'next/navigation'
 import {useOperations} from '@/data/operationsContext'

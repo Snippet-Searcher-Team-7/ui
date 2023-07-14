@@ -12,9 +12,9 @@ import {useRouter} from 'next/navigation'
 export const SidebarItems: FC = () => {
   const router = useRouter()
 
-  const handleSnippetsClick = useCallback(() => router.push('/snippets'), [router])
+  const handleSnippetsClick = useCallback(() => router.push('/authenticated/snippets'), [router])
 
-  const handleSettingsClick = useCallback(() => router.push('/settings'), [router])
+  const handleSettingsClick = useCallback(() => router.push('/authenticated/settings'), [router])
 
     const handleHomeClick = useCallback(() => router.push('/'), [router])
 

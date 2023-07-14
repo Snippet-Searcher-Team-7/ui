@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 import {CircularProgress, Grid, Table, TableBody, TableCell, TableHead, TableRow} from '@mui/material'
 import {useQuery} from '@tanstack/react-query'
 import {useOperations} from '@/data/operationsContext'
-import {SnippetRow} from '@/app/snippets/snippetRow'
+import {SnippetRow} from '@/app/authenticated/snippets/snippetRow'
 
 export const SnippetTable: FC = () => {
 

@@ -3,6 +3,7 @@ import {ReactNode} from "react";
 import {useUser} from "@auth0/nextjs-auth0/client";
 import {useRouter} from "next/navigation";
 
+
 type AuthenticatedProps = {
     children: ReactNode,
 }

@@ -14,17 +14,19 @@ export class RequestManager {
             this.getRequest(this.snippet_service_url + '/snippet/getAllSnippets/' + id,
                 (data) => {
                     let list: StoredSnippet[] = []
-                    data.forEach(snippet => {
-                        list.push(
-                            {id: snippet.id + "",
-                                name: snippet.snippetName,
-                                type: snippet.type.toLowerCase(),
-                                content: snippet.snippetText,
-                                compliance: this.adaptStatus(snippet.status)}
-                        )
-                    })
-                    console.log("getSnippets sucessful")
-                    response(list)
+                    if (data != null){
+                        data.forEach(snippet => {
+                            list.push(
+                                {id: snippet.id + "",
+                                    name: snippet.snippetName,
+                                    type: snippet.type.toLowerCase(),
+                                    content: snippet.snippetText,
+                                    compliance: this.adaptStatus(snippet.status)}
+                            )
+                        })
+                        console.log("getSnippets sucessful")
+                        response(list)
+                    }
                 },
                 (error) => {
                     console.log(error)

@@ -4,7 +4,7 @@ import React, {FC, useCallback} from 'react'
 import {useOperations} from '@/data/operationsContext'
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {CircularProgress, Grid, Paper, Typography} from '@mui/material'
-import {EditSnippetForm} from '@/app/snippets/edit/[id]/editSnippetForm'
+import {EditSnippetForm} from '@/app/authenticated/snippets/edit/[id]/editSnippetForm'
 import {UpdateSnippet} from '@/data/snippet'
 import {useRouter} from 'next/navigation'
 

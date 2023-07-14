@@ -1,12 +1,14 @@
 "use client";
 import * as React from 'react';
-import {FC, useState, useEffect} from 'react'
+import {FC, useState, useEffect, useCallback} from 'react'
 import {useOperations} from "@/data/operationsContext";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
+import {useUser} from "@auth0/nextjs-auth0/client";
+import {useRouter} from "next/navigation";
 
 const SettingsPage: FC = () => {
     const [spaceBeforeColonInDeclaration, setSpaceBeforeColonInDeclaration] = useState(false);
@@ -21,7 +23,6 @@ const SettingsPage: FC = () => {
     const [readInputCondition, setReadInputCondition] = useState(false);
 
     const {snippetOperations} = useOperations()
-
 
     useEffect(() => {
         snippetOperations.getFormattingRules(

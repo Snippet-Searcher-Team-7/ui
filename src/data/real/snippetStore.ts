@@ -21,9 +21,11 @@ export class SnippetStore {
     constructor(userId: string | null | undefined) {
         this.userId = userId;
         this.requestManager.getSnippetsOfUser(userId, (list => {
-            list.forEach(snippet => {
-                this.snippetMap.set(snippet.id, snippet)
-            })
+            if (list != null){
+                list.forEach(snippet => {
+                    this.snippetMap.set(snippet.id, snippet)
+                })
+            }
         }))
     }
 
