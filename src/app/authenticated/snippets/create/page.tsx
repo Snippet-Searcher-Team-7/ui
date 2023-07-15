@@ -16,11 +16,11 @@ const CreateSnippetPage: FC = () => {
 
   const handleCreate = useCallback((createSnippet: CreateSnippet) => {
     mutate(createSnippet)
-    router.push('/snippets')
+    router.push('/authenticated/snippets')
   }, [mutate, router])
 
   const handleCancel = useCallback(() => {
-    router.push('/snippets')
+    router.push('/authenticated/snippets')
   }, [router])
 
   return (

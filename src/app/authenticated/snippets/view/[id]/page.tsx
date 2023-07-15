@@ -23,11 +23,11 @@ const CreateSnippetPage: FC<CreateSnippetPageProps> = ({params}) => {
   const {data: snippet, isFetching} = useQuery(['snippets', 'full', id], () => snippetOperations.getSnippetById(id))
 
   const handleGoToEdit = useCallback(() => {
-    router.push(`/snippets/edit/${id}`)
+    router.push(`/authenticated/snippets/edit/${id}`)
   }, [id, router])
 
   const handleGoToSnippets = useCallback(() => {
-    router.push(`/snippets`)
+    router.push(`/authenticated/snippets`)
   }, [id, router])
 
   return (

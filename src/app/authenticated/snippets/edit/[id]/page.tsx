@@ -28,11 +28,11 @@ const CreateSnippetPage: FC<CreateSnippetPageProps> = ({params}) => {
 
   const handleUpdate = useCallback((updateSnippet: UpdateSnippet) => {
     mutate(updateSnippet)
-    router.push(`/snippets/view/${id}`)
+    router.push(`/authenticated/snippets/view/${id}`)
   }, [id, mutate, router])
 
   const handleCancel = useCallback(() => {
-    router.push(`/snippets/view/${id}`)
+    router.push(`/authenticated/snippets/view/${id}`)
   }, [id, router])
 
   return (
