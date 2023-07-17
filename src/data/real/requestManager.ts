@@ -5,7 +5,7 @@ import {getCookie} from "cookies-next";
 
 
 export class RequestManager {
-    private snippet_service_url:string = "http://localhost:8081";
+    private snippet_service_url:string = "https://snippetteam7dev.ddns.net/snippet-api";
 
     headers = {
         headers: {
@@ -13,12 +13,8 @@ export class RequestManager {
             'Content-Type': 'application/json'
         }
     };
-    getToken(){
-
-    }
 
     getSnippetsOfUser(id: string | null | undefined, response) {
-        this.getToken();
         if (id != null){
             this.getRequest(this.snippet_service_url + '/snippet/getAllSnippets/' + id,
                 (data) => {
@@ -129,20 +125,6 @@ export class RequestManager {
         })
     }
 
-    createTestCase(data) {
-    }
-
-    executeSnippet(id: String): Promise<String> {
-        return Promise.resolve("");
-    }
-
-    runTestCase(data): Promise<String> {
-        return Promise.resolve("");
-    }
-
-    shareSnippet(snippetId: String, sharedUserId: String) {
-    }
-
     private postRequest(url, data, okCallback, errorCallback) {
         axios.post(url, data, this.headers)
             .then(function (response) {
@@ -153,7 +135,6 @@ export class RequestManager {
             });
     }
     private getRequest(url, okCallback, errorCallback) {
-        console.log(this.headers)
         axios.get(url, this.headers)
             .then(function (response) {
                 okCallback(response.data)

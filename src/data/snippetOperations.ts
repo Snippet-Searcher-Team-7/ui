@@ -17,13 +17,4 @@ export interface SnippetOperations {
 
   updateLinterRules(rules)
 
-  executeSnippet(id: String) : Promise<String>
-
-  shareSnippet(snippetId: String, sharedUserId: String)
-
-  createTestCase(data)
-
-  runTestCase(data): Promise<String>
-
-
 }

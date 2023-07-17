@@ -56,18 +56,4 @@ export class SnippetOperationsImpl implements SnippetOperations {
         this.snippetStore.updateLinterRules(rules)
     }
 
-    createTestCase(data) {
-    }
-
-    executeSnippet(id: String): Promise<String> {
-        return Promise.resolve("");
-    }
-
-    runTestCase(data): Promise<String> {
-        return Promise.resolve("");
-    }
-
-    shareSnippet(snippetId: String, sharedUserId: String) {
-    }
-
 }

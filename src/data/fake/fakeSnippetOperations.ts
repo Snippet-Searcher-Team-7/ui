@@ -37,20 +37,6 @@ export class FakeSnippetOperations implements SnippetOperations {
     })
   }
 
-  createTestCase(data) {
-  }
-
-  executeSnippet(id: String): Promise<String> {
-    return Promise.resolve("");
-  }
-
-  runTestCase(data): Promise<String> {
-    return Promise.resolve("");
-  }
-
-  shareSnippet(snippetId: String, sharedUserId: String) {
-  }
-
   updateFormattingRules(userId: string) {
   }
 
