@@ -36,4 +36,16 @@ export class FakeSnippetOperations implements SnippetOperations {
       setTimeout(() => resolve(this.fakeStore.updateSnippet(id, updateSnippet)), DELAY)
     })
   }
+
+  updateFormattingRules(userId: string) {
+  }
+
+  updateLinterRules(userId: string) {
+  }
+
+  getFormattingRules(okCallback, errorCallback) {
+  }
+
+  getLinterRules(okCallback, errorCallback) {
+  }
 }

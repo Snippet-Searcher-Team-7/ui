@@ -15,11 +15,11 @@ export const SnippetRow: FC<SnippetRowType> = ({snippet}) => {
   const router = useRouter()
 
   const handleView = useCallback(() => {
-    router.push(`/snippets/view/${snippet.id}`)
+    router.push(`/authenticated/snippets/view/${snippet.id}`)
   }, [router, snippet.id])
 
   const handleEdit = useCallback(() => {
-    router.push(`/snippets/edit/${snippet.id}`)
+    router.push(`/authenticated/snippets/edit/${snippet.id}`)
   }, [router, snippet.id])
 
   return (

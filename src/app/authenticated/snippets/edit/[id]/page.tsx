@@ -4,7 +4,7 @@ import React, {FC, useCallback} from 'react'
 import {useOperations} from '@/data/operationsContext'
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {CircularProgress, Grid, Paper, Typography} from '@mui/material'
-import {EditSnippetForm} from '@/app/snippets/edit/[id]/editSnippetForm'
+import {EditSnippetForm} from '@/app/authenticated/snippets/edit/[id]/editSnippetForm'
 import {UpdateSnippet} from '@/data/snippet'
 import {useRouter} from 'next/navigation'
 
@@ -28,11 +28,11 @@ const CreateSnippetPage: FC<CreateSnippetPageProps> = ({params}) => {
 
   const handleUpdate = useCallback((updateSnippet: UpdateSnippet) => {
     mutate(updateSnippet)
-    router.push(`/snippets/view/${id}`)
+    router.push(`/authenticated/snippets/view/${id}`)
   }, [id, mutate, router])
 
   const handleCancel = useCallback(() => {
-    router.push(`/snippets/view/${id}`)
+    router.push(`/authenticated/snippets/view/${id}`)
   }, [id, router])
 
   return (

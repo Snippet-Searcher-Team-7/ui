@@ -1,9 +1,12 @@
+"use client"
+import React from "react";
+import HomePage from "@/util/homePage";
+
 const Home = () => {
   return (
     <>
-      Some Content
+        <HomePage/>
     </>
   )
 }
-
 export default Home

@@ -9,7 +9,7 @@ import {SnippetTable} from './snippetTable'
 const SnippetsPage: FC = () => {
   const router = useRouter()
 
-  const handleCreateClick = useCallback(() => router.push('/snippets/create'), [router])
+  const handleCreateClick = useCallback(() => router.push('/authenticated/snippets/create'), [router])
 
   return (
     <>

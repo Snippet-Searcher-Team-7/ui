@@ -3,7 +3,7 @@ import {CreateSnippet, CreateSnippetSchema, SnippetType} from '@/data/snippet'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {Box, Button, Grid, MenuItem} from '@mui/material'
 import {FormContainer, SelectElement, TextFieldElement} from 'react-hook-form-mui'
-import {SnippetFileField} from '@/app/snippets/create/snippetFileField'
+import {SnippetFileField} from '@/app/authenticated/snippets/create/snippetFileField'
 
 const TYPE_OPTIONS = [
   {
