@@ -5,7 +5,7 @@ import {getCookie} from "cookies-next";
 
 
 export class RequestManager {
-    private snippet_service_url:string = "https://snippetteam7dev.ddns.net/snippet-api";
+    private snippet_service_url:string = "https://snippetteam7prod.ddns.net/snippet-api";
 
     headers = {
         headers: {
