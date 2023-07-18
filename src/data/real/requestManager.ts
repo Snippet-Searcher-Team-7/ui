@@ -16,7 +16,6 @@ export class RequestManager {
     };
 
     getSnippetsOfUser(id: string | null | undefined, response) {
-        this.getToken()
         if (id != null){
             this.getRequest(this.snippet_service_local_url + '/snippet/getAllSnippets/' + id,
                 (data) => {
